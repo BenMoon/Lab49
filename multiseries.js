@@ -34,10 +34,10 @@ var multigraph = function(sets) {
     series: sets
     });
 
-/*    var time = new Rickshaw.Fixtures.Time();
+    var time = new Rickshaw.Fixtures.Time();
     var months = time.unit('month');
     var x_axis = new Rickshaw.Graph.Axis.Time({
-    graph: graph,
+        graph: graph,
     });
 
     var y_axis = new Rickshaw.Graph.Axis.Y( {
@@ -47,22 +47,50 @@ var multigraph = function(sets) {
         element: document.getElementById('y_axis'),
     } );
 
-
+    /*
     var legend = new Rickshaw.Graph.Legend( {
         element: document.getElementById('legend'),
         graph: graph
     } );
-*/
+    */
 
     graph.render();
 
-    var hoverDetail = new Rickshaw.Graph.HoverDetail( {
-    graph: graph,
-    formatter: function(series, x, y) {
-        var date = '<span class="date">' + new Date(x * 1000).toUTCString() + '</span>';
-        var swatch = '<span class="detail_swatch" style="background-color: ' + series.color + '"></span>';
-        var content = swatch + series.name + ": " + parseInt(y) + '<br>' + date;
-        return content;
-    }
-} );
+    var legend = document.querySelector('#legend');
+    
+    var Hover = Rickshaw.Class.create(Rickshaw.Graph.HoverDetail, {
+	render: function(args) {
+		legend.innerHTML = args.formattedXValue;
+		args.detail.sort(function(a, b) { return a.order - b.order }).forEach( function(d) {
+			var line = document.createElement('div');
+			line.className = 'line';
+
+			var swatch = document.createElement('div');
+			swatch.className = 'swatch';
+			swatch.style.backgroundColor = d.series.color;
+
+			var label = document.createElement('div');
+			label.className = 'label';
+			label.innerHTML = d.name + ": " + d.formattedYValue;
+
+			line.appendChild(swatch);
+			line.appendChild(label);
+			legend.appendChild(line);
+
+			var dot = document.createElement('div');
+			dot.className = 'dot';
+			dot.style.top = graph.y(d.value.y0 + d.value.y) + 'px';
+			dot.style.borderColor = d.series.color;
+
+			this.element.appendChild(dot);
+
+			dot.className = 'dot active';
+
+			this.show();
+		}, this );
+        }
+});
+
+var hover = new Hover( { graph: graph } ); 
+
 };

@@ -2,40 +2,77 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<!--link rel="stylesheet" type="text/css" href="multiseries.css"-->
-<!--link type="text/css" rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css"-->
-<link rel="stylesheet" type="text/css" href="http://raw.github.com/shutterstock/rickshaw/master/rickshaw.css">
+
+<link rel="stylesheet" type="text/css" href="multiseries.css">
 <link rel="stylesheet" type="text/css" href="http://raw.github.com/shutterstock/rickshaw/master/src/css/graph.css">
 <link rel="stylesheet" type="text/css" href="http://raw.github.com/shutterstock/rickshaw/master/src/css/detail.css">
 <link rel="stylesheet" type="text/css" href="http://raw.github.com/shutterstock/rickshaw/master/src/css/legend.css">
-<link rel="stylesheet" type="text/css" href="https://github.com/shutterstock/rickshaw/blob/master/examples/css/lines.css">
 
-<script src="js/rickshaw.js"></script>
+
+
 <!--script
 src="http://raw.github.com/shutterstock/rickshaw/master/rickshaw.min.js"></script-->
 <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
+<script src="js/rickshaw.js"></script>
+<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script
+    src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script-->
 
-<style>
-    .rickshaw_graph .detail .x_label { display: none }
-    .rickshaw_graph .detail .item { line-height: 1.4; padding: 0.5em }
-    .detail_swatch { float: right; display: inline-block; width: 10px; height: 10px; margin: 0 4px 0 0 }
-    .rickshaw_graph .detail .date { color: #a0a0a0 }
-</style>
+    <style>
+		body { 
+			font-family: Arial, sans-serif 
+		}
+		#chart_container {
+			width: 960px;
+		}
+		.swatch {
+			display: inline-block;
+			width: 10px;
+			height: 10px;
+			margin: 0 8px 0 0;
+		}
+		.label {
+			display: inline-block;
+		}
+		.line {
+			display: inline-block;
+			margin: 0 0 0 30px;
+		}
+		#legend {
+			text-align: center;
+		}
+		.rickshaw_graph .detail {
+			background: none;
+                }
+                #y_axis {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    width: 40px;
+                }
+	</style>
+
+
 
 </head>
 
 <body>
 
-<div id="chart_container">
+<!--div id="chart_container">
     <div id="chart"></div>
     <div id="legend_container">
         <div id="smoother" title="Smoothing"></div>
         <div id="legend"></div>
     </div>
+    <div id="y_axis"></div>
     <div id="slider"></div>
+</div-->
+<div id="chart_container">
+<div id="y_axis" class="plain"></div>
+<div id="chart"></div>
+<div id="legend"></div>
 </div>
+<div id="rawdata"></div>
 
 <script src="multiseries.js"></script>
 </body>
